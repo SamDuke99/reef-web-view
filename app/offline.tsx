@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Offline() {
   return (
@@ -12,6 +13,7 @@ export default function Offline() {
         <ThemedText type='title'>
           Sorry it looks like you're offline!
         </ThemedText>
+        <MaterialCommunityIcons name='plus' size={30} color={"white"} />
       </ThemedView>
     </>
   );

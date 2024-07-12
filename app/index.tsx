@@ -1,14 +1,20 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, View, ScrollView, RefreshControl } from "react-native";
-import { WebView, WebViewNavigation } from "react-native-webview";
+import { WebView } from "react-native-webview";
+import { useNetInfo } from "@react-native-community/netinfo";
 import NavBar from "@/components/NavBar/NavBar";
-import LoadingSpinner from "@/components/LoadingSpinner";
-
+import styles from "@/assets/style";
+import ErrorComponent from "@/components/NavBar/ErrorComponent";
+import WebViewContainer from "@/components/WebViewContainer";
+import Offline from "./offline";
 export default function App() {
   const webViewRef = useRef<WebView | null>(null);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [canGoBack, setCanGoBack] = useState<boolean>(false);
   const [canGoForward, setCanGoForward] = useState<boolean>(false);
+  const [webViewError, setWebViewError] = useState<string | null>(null);
+
+  const netInfo = useNetInfo();
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -16,11 +22,6 @@ export default function App() {
       webViewRef.current.reload();
     }
     setTimeout(() => setRefreshing(false), 1000);
-  };
-
-  const handleNavigationStateChange = (navState: WebViewNavigation) => {
-    setCanGoBack(navState.canGoBack);
-    setCanGoForward(navState.canGoForward);
   };
 
   const goBack = () => {
@@ -35,6 +36,13 @@ export default function App() {
     }
   };
 
+  const reloadWebView = () => {
+    setWebViewError(null);
+    if (webViewRef.current) {
+      webViewRef.current.reload();
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -43,18 +51,23 @@ export default function App() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <WebView
-          ref={webViewRef}
-          style={styles.webView}
-          source={{ uri: "https://gravity.getreef.com/warrington?locale=en" }}
-          startInLoadingState={true}
-          renderLoading={() => (
-            <View style={styles.loadingOverlay}>
-              <LoadingSpinner />
-            </View>
-          )}
-          onNavigationStateChange={handleNavigationStateChange}
-        />
+        {netInfo.isConnected ? (
+          webViewError ? (
+            <ErrorComponent
+              error={webViewError}
+              reloadWebView={reloadWebView}
+            />
+          ) : (
+            <WebViewContainer
+              webViewRef={webViewRef}
+              setCanGoBack={setCanGoBack}
+              setCanGoForward={setCanGoForward}
+              setWebViewError={setWebViewError}
+            />
+          )
+        ) : (
+          <Offline />
+        )}
       </ScrollView>
       <NavBar
         goBack={goBack}
@@ -65,18 +78,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  webView: {
-    flex: 1,
-  },
-  loadingOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
-  },
-});

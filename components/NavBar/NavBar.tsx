@@ -2,7 +2,6 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import LocationButton from "./LocationButton";
-import * as Location from "expo-location";
 
 interface NavBarProps {
   goBack: () => void;
@@ -17,10 +16,6 @@ const NavBar: React.FC<NavBarProps> = ({
   canGoBack,
   canGoForward,
 }) => {
-  const handleLocationFetched = (location: Location.LocationObjectCoords) => {
-    alert(`Latitude: ${location.latitude}, Longitude: ${location.longitude}`);
-  };
-
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity onPress={goBack} disabled={!canGoBack}>
@@ -30,7 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({
           color={!canGoBack ? "#ccc" : "#000"}
         />
       </TouchableOpacity>
-      <LocationButton onLocationFetched={handleLocationFetched} />
+      <LocationButton />
       <TouchableOpacity onPress={goForward} disabled={!canGoForward}>
         <MaterialCommunityIcons
           name='chevron-right'
