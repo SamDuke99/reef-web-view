@@ -126,9 +126,7 @@ export default function App() {
   `;
 
   return (
-    <SafeAreaView
-      style={[styles.container, isDarkMode && styles.darkContainer]}
-    >
+    <View style={[styles.container, isDarkMode && styles.darkContainer]}>
       <ScrollView
         contentContainerStyle={{ flex: 1 }}
         refreshControl={
@@ -178,6 +176,6 @@ export default function App() {
         isDarkMode={isDarkMode}
         refreshWebView={reloadWebView}
       />
-    </SafeAreaView>
+    </View>
   );
 }

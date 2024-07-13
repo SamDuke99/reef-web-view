@@ -1,50 +1,37 @@
-# Welcome to your Expo app 👋
+# React Native Candidate Home Task
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Task Overview
 
-## Get started
+This React Native application integrates a WebView to display the Gravity website and includes additional features like geolocation. The goal is to demonstrate clean code practices, ensure smooth performance, and provide an enhanced user experience.
 
-1. Install dependencies
+## Files Overview
 
-   ```bash
-   npm install
-   ```
+### `index.tsx`
 
-2. Start the app
+The `index.tsx` file serves as the main entry point for the React Native application. It integrates a WebView component to display the Gravity website and incorporates various features such as pull-to-refresh, navigation controls, error handling, and geolocation support. The app also supports dark mode and adjusts its UI based on network connectivity. Developed using TypeScript, the code emphasizes clean, modular practices to ensure smooth performance and a responsive user experience on both Android and iOS platforms.
 
-   ```bash
-    npx expo start
-   ```
+### `components/NavBar.tsx`
 
-In the output, you'll find options to open the app in a
+The `NavBar.tsx` component provides navigation controls and UI elements for the React Native application. It includes buttons for navigating backward and forward in the WebView, toggling between light and dark modes, and accessing location-related features. The component dynamically adjusts its appearance based on the application's dark mode status and WebView navigation state.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### `components/LocationButton.tsx`
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+The `LocationButton.tsx` component facilitates location fetching and interaction within the React Native application. It integrates with Expo's location services to retrieve the user's current coordinates and fetches additional details using a custom API endpoint. The component includes functionality to display location information in a modal, copy details to the clipboard, and adjusts its appearance based on the application's dark mode setting.
 
-## Get a fresh project
+### `api/fetchLocationInfo.ts`
 
-When you're ready, run:
+The `fetchLocationInfo.ts` file contains the function `fetchLocationDetails` which retrieves location information based on latitude and longitude coordinates. It utilizes the Geoapify API to reverse geocode the coordinates and fetch the corresponding address details. To obtain an API key for Geoapify, visit [Geoapify Projects](https://myprojects.geoapify.com/projects) and create a project.
 
-```bash
-npm run reset-project
-```
+Once you have your API key, replace the `apiKey` variable in the `fetchLocationDetails` function in this file with your actual API key. This ensures proper functionality of the location fetching feature in your application. Error handling is implemented to manage potential network issues or API errors during the data fetching process.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### `components/LoadingSpinner.tsx`
 
-## Learn more
+The `LoadingSpinner.tsx` component provides a spinning animation with a random (food related) emoji displayed, indicating loading activity within the React Native application. It uses React Native's Animated API to animate the rotation of the emoji in a continuous loop. The animation duration and easing are configured for smooth visual feedback. This component enhances user experience by visually indicating ongoing processes such as data loading or operations.
 
-To learn more about developing your project with Expo, look at the following resources:
+### `components/WebViewContainer.tsx`
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The `WebViewContainer.tsx` component encapsulates a WebView instance within the React Native application. It integrates with the Gravity website through the `react-native-webview` library, providing functionalities such as handling navigation state changes, managing WebView errors, and injecting custom JavaScript for dark mode styling. The component also includes a loading spinner while content is loading to enhance user experience. This component plays a crucial role in displaying external web content seamlessly within the application.
 
-## Join the community
+### `assets/styles.ts`
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+The `styles.ts` file contains predefined style constants used throughout the React Native application. It defines styles for containers, web views, loading overlays, error messages, headers, navigation bars, and modals, ensuring consistent visual presentation across different components.

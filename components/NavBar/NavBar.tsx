@@ -1,5 +1,3 @@
-// components/NavBar.tsx
-
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
