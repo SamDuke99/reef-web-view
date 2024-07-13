@@ -4,6 +4,19 @@
 
 This React Native application integrates a WebView to display the Gravity website and includes additional features like geolocation. The goal is to demonstrate clean code practices, ensure smooth performance, and provide an enhanced user experience.
 
+## How to run
+
+First clone the repo.
+
+The easiest way to run this is to download `expo go` and run it through this.
+
+Once install run `yarn start` or if you are not connected to the same WiFi on your phone and terminal use `yarn start --tunnel`.
+
+This will generate a QR code for you to scan and instantly run the app.
+
+Please note that if you want to use the location feature you will need to get an API key from Geoapify, visit [Geoapify Projects](https://myprojects.geoapify.com/projects) and create a project. Then place this api key in `api/fetchLocationInfo.ts`.
+_In an ideal world I would deploy this with env files containing the key but I just didn't have time and didn't want to push a key (albeit a public api) to github_
+
 ## Files Overview
 
 ### `index.tsx`
