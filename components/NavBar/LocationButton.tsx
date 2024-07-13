@@ -11,8 +11,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import * as Clipboard from "expo-clipboard";
 import fetchLocationDetails from "@/api/fetchLocationInfo";
+import styles from "@/assets/style";
 
-const LocationButton: React.FC = () => {
+interface LocationButtonProps {
+  isDarkMode: boolean;
+}
+
+const LocationButton: React.FC<LocationButtonProps> = ({ isDarkMode }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [locationDetails, setLocationDetails] = useState<string>("");
 
@@ -43,15 +48,26 @@ const LocationButton: React.FC = () => {
     await Clipboard.setStringAsync(locationDetails);
     alert("Location details copied to clipboard!");
   };
-
+  console.log(isDarkMode);
   return (
     <View>
       <TouchableOpacity onPress={fetchLocation}>
-        <MaterialCommunityIcons name='map-marker' size={30} color={"#000"} />
+        <MaterialCommunityIcons
+          name='map-marker'
+          size={30}
+          color={isDarkMode ? "#ffffff" : "#000000"}
+        />
       </TouchableOpacity>
       <Modal visible={isModalVisible} transparent={true} animationType='slide'>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
+        <View
+          style={[
+            styles.modalContainer,
+            isDarkMode && styles.darkModalContainer,
+          ]}
+        >
+          <View
+            style={[styles.modalContent, isDarkMode && styles.darkModalContent]}
+          >
             <Text style={styles.modalText}>{locationDetails}</Text>
             <Button title='Copy to Clipboard' onPress={copyToClipboard} />
             <Button title='Close' onPress={() => setModalVisible(false)} />
@@ -61,24 +77,5 @@ const LocationButton: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  modalContent: {
-    backgroundColor: "white",
-    padding: 20,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  modalText: {
-    marginBottom: 20,
-    textAlign: "center",
-  },
-});
 
 export default LocationButton;

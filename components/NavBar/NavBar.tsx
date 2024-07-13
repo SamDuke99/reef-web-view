@@ -1,13 +1,20 @@
+// components/NavBar.tsx
+
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import LocationButton from "./LocationButton";
+import styles from "@/assets/style";
 
 interface NavBarProps {
   goBack: () => void;
   goForward: () => void;
   canGoBack: boolean;
   canGoForward: boolean;
+  toggleDarkMode: () => void;
+  isDarkMode: boolean;
+  refreshWebView: () => void;
+  style?: any;
 }
 
 const NavBar: React.FC<NavBarProps> = ({
@@ -15,37 +22,42 @@ const NavBar: React.FC<NavBarProps> = ({
   goForward,
   canGoBack,
   canGoForward,
+  toggleDarkMode,
+  isDarkMode,
+  refreshWebView,
+  style,
 }) => {
+  const handleToggleDarkMode = () => {
+    toggleDarkMode();
+    refreshWebView();
+  };
+
   return (
-    <View style={styles.buttonContainer}>
+    <View style={[styles.navBar, isDarkMode ? styles.darkNavBar : null, style]}>
       <TouchableOpacity onPress={goBack} disabled={!canGoBack}>
         <MaterialCommunityIcons
           name='chevron-left'
           size={30}
-          color={!canGoBack ? "#ccc" : "#000"}
+          color={!canGoBack ? "#ccc" : isDarkMode ? "#ffffff" : "#000000"}
         />
       </TouchableOpacity>
-      <LocationButton />
+      <LocationButton isDarkMode={isDarkMode} />
+      <TouchableOpacity onPress={handleToggleDarkMode}>
+        <MaterialCommunityIcons
+          name={isDarkMode ? "lightbulb-off" : "lightbulb"}
+          size={30}
+          color={isDarkMode ? "#ffffff" : "#000000"}
+        />
+      </TouchableOpacity>
       <TouchableOpacity onPress={goForward} disabled={!canGoForward}>
         <MaterialCommunityIcons
           name='chevron-right'
           size={30}
-          color={!canGoForward ? "#ccc" : "#000"}
+          color={!canGoForward ? "#ccc" : isDarkMode ? "#ffffff" : "#000000"}
         />
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
-    backgroundColor: "#f8f8f8",
-    borderTopWidth: 1,
-    borderColor: "#e7e7e7",
-  },
-});
 
 export default NavBar;

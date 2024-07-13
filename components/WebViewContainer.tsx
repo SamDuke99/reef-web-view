@@ -38,11 +38,40 @@ const WebViewContainer: React.FC<WebViewContainerProps> = ({
     }
   };
 
+  const onMessage = (event: any) => {
+    console.log(event.nativeEvent.data);
+  };
+
+  const darkModeCSS = `
+    body, html, div, p, a, span, h1, h2, h3, h4, h5, h6, header, footer, section, article, aside, main, nav, figure, figcaption {
+      background-color: #121212 !important;
+      color: #e0e0e0 !important;
+    }
+
+    a {
+      color: #bb86fc !important;
+    }
+
+    /* Add more styles as needed */
+  `;
+
+  const injectDarkModeCSS = `
+    (function() {
+      const style = document.createElement('style');
+      style.type = 'text/css';
+      style.appendChild(document.createTextNode(\`${darkModeCSS}\`));
+      document.head.appendChild(style);
+      window.ReactNativeWebView.postMessage('Dark mode CSS injected');
+    })();
+  `;
+
   return (
     <WebView
       ref={webViewRef}
       style={styles.webView}
-      source={{ uri: "https://gravity.getreef.com/warrington?locale=en" }}
+      source={{
+        uri: "https://gravity.getreef.com/warrington?locale=en",
+      }}
       startInLoadingState={true}
       renderLoading={() => (
         <View style={styles.loadingOverlay}>
@@ -52,6 +81,8 @@ const WebViewContainer: React.FC<WebViewContainerProps> = ({
       onNavigationStateChange={handleNavigationStateChange}
       onError={handleWebViewError}
       onHttpError={handleHttpError}
+      injectedJavaScript={injectDarkModeCSS}
+      onMessage={onMessage}
     />
   );
 };
