@@ -1,33 +1,18 @@
-import { Link, Stack } from "expo-router";
-import { StyleSheet } from "react-native";
+import React from "react";
+import { View, Text } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import styles from "@/assets/style";
 
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-export default function Offline() {
+const Offline = () => {
   return (
-    <>
-      <Stack.Screen options={{ title: "Oops!" }} />
-      <ThemedView style={styles.container}>
-        <ThemedText type='title'>
-          Sorry it looks like you're offline!
-        </ThemedText>
-        <MaterialCommunityIcons name='plus' size={30} color={"white"} />
-      </ThemedView>
-    </>
+    <View style={styles.offlineContainer}>
+      <MaterialIcons name='error' size={100} color='#000000' />
+      <Text style={styles.offlineText}>
+        Oops! It looks like you're offline. Please check your connection and try
+        again.
+      </Text>
+    </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-});
+export default Offline;

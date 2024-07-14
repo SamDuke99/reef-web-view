@@ -1,12 +1,12 @@
-# React Native Candidate Home Task
-
-## Task Overview
+## Overview
 
 This React Native application integrates a WebView to display the Gravity website and includes additional features like geolocation. The goal is to demonstrate clean code practices, ensure smooth performance, and provide an enhanced user experience.
 
+Overall I'm pretty happy with how this has turned out with limited time. Hopefully all of the tasks are completed and the bonus tasks are done. Only thing I'm not happy with is an issue with the safe area for iOS not switching colour for dark mode but I'm going to keep looking at that after this is finished and try find a fix.
+
 ## How to run
 
-First clone the repo.
+First clone the repo and run `yarn`.
 
 The easiest way to run this is to download `expo go` and run it through this.
 
@@ -16,6 +16,10 @@ This will generate a QR code for you to scan and instantly run the app.
 
 Please note that if you want to use the location feature you will need to get an API key from Geoapify, visit [Geoapify Projects](https://myprojects.geoapify.com/projects) and create a project. Then place this api key in `api/fetchLocationInfo.ts`.
 _In an ideal world I would deploy this with env files containing the key but I just didn't have time and didn't want to push a key (albeit a public api) to github_
+
+I've added a unit test for the fetchLocation file. Just run `yarn test` to spin that up.
+
+I idealy had wanted to write more tests but had a really busy week and ran out of time and decided to go for functionality over unit testing.
 
 ## Files Overview
 

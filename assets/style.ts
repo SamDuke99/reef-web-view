@@ -1,9 +1,16 @@
-import { Platform, StatusBar, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+  },
+  darkSafeArea: {
+    backgroundColor: "#121212",
+  },
   container: {
     flex: 1,
-    backgroundColor: "#121212",
+    backgroundColor: "#ffffff",
   },
   darkContainer: {
     backgroundColor: "#121212",
@@ -21,6 +28,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 20,
   },
   errorText: {
     marginBottom: 20,
@@ -67,17 +75,30 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.5)",
   },
   modalContent: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     padding: 20,
     borderRadius: 10,
     alignItems: "center",
   },
   darkModalContent: {
-    backgroundColor: "#333",
+    backgroundColor: "#333333",
   },
   modalText: {
     marginBottom: 20,
     textAlign: "center",
+  },
+  offlineContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    padding: 20,
+  },
+  offlineText: {
+    fontSize: 18,
+    textAlign: "center",
+    marginTop: 20,
+    color: "#000000",
   },
 });
 

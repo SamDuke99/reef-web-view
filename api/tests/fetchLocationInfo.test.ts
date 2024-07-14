@@ -1,5 +1,5 @@
 import axios from "axios";
-import fetchLocationDetails from "./fetchLocationInfo";
+import fetchLocationDetails from "../fetchLocationInfo";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
