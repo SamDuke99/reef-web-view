@@ -48,7 +48,19 @@ const WebViewContainer: React.FC<WebViewContainerProps> = ({
     a {
       color: #bb86fc !important;
     }
-    .container-fluid.fixed-top.bg-white, .lh-1.py-3.px-3 {
+    svg {
+      filter: invert(1) hue-rotate(180deg);
+    }
+    .fa-sharp, .fa-regular, .fa-bars, .fa-lg {
+      color: #e0e0e0 !important;
+    }
+    .container-fluid.fixed-top.bg-white, .lh-1.py-3.px-3, .bg-white, .margin-p-4, .margin-bottom-0 {
+      background-color: #121212 !important;
+    }
+    .d-flex.pb-4.mt-2 {
+      background-color: #121212 !important;
+    }
+    .divider-cat-items.pb-2 {
       background-color: #121212 !important;
     }
   `;
@@ -60,6 +72,9 @@ const WebViewContainer: React.FC<WebViewContainerProps> = ({
     }
     a {
       color: #0000ff !important;
+    }
+    .fa-sharp, .fa-regular, .fa-bars, .fa-lg {
+      color: #000000 !important;
     }
   `;
 
@@ -73,6 +88,11 @@ const WebViewContainer: React.FC<WebViewContainerProps> = ({
     })();
   `;
 
+  const handleRetry = () => {
+    setWebViewError(null);
+    reloadWebView();
+  };
+
   return (
     <>
       {webViewError ? (
@@ -80,7 +100,7 @@ const WebViewContainer: React.FC<WebViewContainerProps> = ({
           <Text style={[styles.errorText, isDarkMode && styles.darkText]}>
             {webViewError}
           </Text>
-          <Button title='Retry' onPress={reloadWebView} />
+          <Button title='Retry' onPress={handleRetry} />
         </View>
       ) : (
         <WebView
