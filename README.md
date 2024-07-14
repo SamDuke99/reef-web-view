@@ -4,6 +4,8 @@ This React Native application integrates a WebView to display the Gravity websit
 
 Overall I'm pretty happy with how this has turned out with limited time. Hopefully all of the tasks are completed and the bonus tasks are done. Only thing I'm not happy with is an issue with the safe area for iOS not switching colour for dark mode but I'm going to keep looking at that after this is finished and try find a fix.
 
+
+
 ## How to run
 
 First clone the repo and run `yarn`.
